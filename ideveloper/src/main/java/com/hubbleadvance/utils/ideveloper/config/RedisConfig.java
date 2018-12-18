@@ -44,8 +44,8 @@ public class RedisConfig {
     private long maxWaitMillis;
 
     @Bean
-    public RedisTemplate<String, String> redisTemplate(JedisConnectionFactory jedisConnectionFactory) {
-        RedisTemplate<String, String> redisTemplate = new RedisTemplate<String, String>();
+    public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory jedisConnectionFactory) {
+        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<String, Object>();
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);

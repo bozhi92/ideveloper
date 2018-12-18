@@ -10,5 +10,5 @@ import com.hubbleadvance.utils.ideveloper.domain.api.ApiDoc;
 @Repository
 public interface IApiDocRepository extends JpaRepository<ApiDoc, String>{
     @Query(nativeQuery=true, value="select * from apidoc where fid = ?1")
-    List<ApiDoc> listByFolderId(String fid);
+    List<ApiDoc> listByFolder(String fid);
 }

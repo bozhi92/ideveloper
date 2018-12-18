@@ -6,7 +6,7 @@ import com.hubbleadvance.utils.ideveloper.controller.JsonResult;
 import com.hubbleadvance.utils.ideveloper.domain.api.ApiDoc;
 
 public interface IApiDocService {
-    List<ApiDoc> listByFolderId(String fid);
+    List<ApiDoc> listByFolder(String fid);
     
     ApiDoc get(String id);
     

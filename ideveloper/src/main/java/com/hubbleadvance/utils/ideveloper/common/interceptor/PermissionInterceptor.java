@@ -26,15 +26,15 @@ public class PermissionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest req, HttpServletResponse res, Object handler) throws Exception {
         User u = HttpSessionHelper.getCurrentLoginUser(req);
-        if (permission(u, req)) {
+        //if (permission(u, req)) {
             return true;
-        }
-        if (RequestUtil.isAjax(req)) {
-            ResponseUtil.returnJsonResult(res, JsonResultCodeEnum.NO_PERMISSION_ERROR.buildResult());
-        } else {
-            res.sendRedirect(req.getContextPath() + "/403");
-        }
-        return false;
+        //}
+//        if (RequestUtil.isAjax(req)) {
+//            ResponseUtil.returnJsonResult(res, JsonResultCodeEnum.NO_PERMISSION_ERROR.buildResult());
+//        } else {
+//            res.sendRedirect(req.getContextPath() + "/403");
+//        }
+//        return false;
         
     }
     

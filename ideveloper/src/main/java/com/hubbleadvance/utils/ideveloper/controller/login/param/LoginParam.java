@@ -1,11 +1,11 @@
 package com.hubbleadvance.utils.ideveloper.controller.login.param;
 
-import com.hubbleadvance.utils.ideveloper.controller.IParam;
+import com.hubbleadvance.utils.ideveloper.controller.Page;
 
 import lombok.Data;
 
 @Data
-public class LoginParam implements IParam {
+public class LoginParam implements Page {
     private String abc;
     private String def;
 }

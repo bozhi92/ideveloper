@@ -11,7 +11,7 @@ import javax.validation.Payload;
 
 import com.hubbleadvance.utils.ideveloper.common.annotation.valid.impl.IdValidImpl;
 
-@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD, ElementType.FIELD})
+@Target({ElementType.ANNOTATION_TYPE, ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Constraint(validatedBy = IdValidImpl.class)

@@ -10,6 +10,7 @@ public enum JsonResultCodeEnum {
     NO_LOGIN_ERROR("303", "未登录"),
     LOGIN_TIME_OUT_ERROR("304", "登录超时"),
     PARAM_ERROR("320", "参数错误"),
+    REQUEST_ERROR("330", "无效的请求"),
     NO_PERMISSION_ERROR("350", "没有权限");
     
     private String code;

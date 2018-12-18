@@ -33,6 +33,8 @@ public class LoginFilter implements Filter {
         
         excludeStartWithList = new ArrayList<String>();
         excludeStartWithList.add("/static");
+        excludeStartWithList.add("/command");
+        excludeStartWithList.add("/demo");
     }
 
     @Override

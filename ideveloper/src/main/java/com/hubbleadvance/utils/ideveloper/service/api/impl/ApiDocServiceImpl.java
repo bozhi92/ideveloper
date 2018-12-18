@@ -22,8 +22,8 @@ public class ApiDocServiceImpl implements IApiDocService {
     private IApiDocRepository apiRepository;
     
     @Override
-    public List<ApiDoc> listByFolderId(String fid) {
-        List<ApiDoc> docList = apiRepository.listByFolderId(fid);
+    public List<ApiDoc> listByFolder(String fid) {
+        List<ApiDoc> docList = apiRepository.listByFolder(fid);
         
         return docList;
     }

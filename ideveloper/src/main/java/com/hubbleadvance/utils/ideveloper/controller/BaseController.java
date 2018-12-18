@@ -1,5 +1,7 @@
 package com.hubbleadvance.utils.ideveloper.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.validation.BindingResult;
@@ -24,6 +26,14 @@ public class BaseController {
     
     public JsonResult validate(BindingResult bindingResult) {
         return ValidUtils.validate(bindingResult);
+    }
+    
+    public JsonResult validateId(List<String> ids) {
+        return ValidUtils.validateId(ids);
+    }
+    
+    public JsonResult validateId(String id) {
+        return ValidUtils.validateId(id);
     }
     
     public User getCurrentLoginUser(HttpServletRequest req) {

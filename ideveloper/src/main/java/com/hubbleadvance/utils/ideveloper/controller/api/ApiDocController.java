@@ -16,7 +16,7 @@ import com.hubbleadvance.utils.ideveloper.domain.api.ApiDoc;
 import com.hubbleadvance.utils.ideveloper.service.api.IApiDocService;
 @Controller
 @RequestMapping(value="/api/doc")
-public class ApiDocController extends BaseController{
+public class ApiDocController extends BaseController {
     @Autowired
     private IApiDocService apiDocService;
     
@@ -27,5 +27,14 @@ public class ApiDocController extends BaseController{
         JsonResult result = validate(bindingResult);
         return result != null ? result : apiDocService.add(apiDoc);
     }
+    
+    @RequestMapping(value="/update")
+    @ResponseBody
+    public JsonResult update(@RequestBody @Validated ApiDoc apiDoc, HttpServletRequest req, BindingResult bindingResult) {
+        apiDoc.setUid(getCurrentLoginUserId(req));
+        JsonResult result = validate(bindingResult);
+        return result != null ? result : apiDocService.add(apiDoc);
+    }
+    
     
 }
