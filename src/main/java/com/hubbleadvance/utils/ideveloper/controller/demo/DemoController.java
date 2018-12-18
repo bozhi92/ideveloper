@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hubbleadvance.utils.ideveloper.PageParam;
 import com.hubbleadvance.utils.ideveloper.common.enums.JsonResultCodeEnum;
 import com.hubbleadvance.utils.ideveloper.common.utils.RequestUtil;
 import com.hubbleadvance.utils.ideveloper.controller.BaseController;
 import com.hubbleadvance.utils.ideveloper.controller.JsonResult;
-import com.hubbleadvance.utils.ideveloper.controller.PageParam;
+import com.hubbleadvance.utils.ideveloper.controller.Page;
 import com.hubbleadvance.utils.ideveloper.domain.demo.Demo;
 import com.hubbleadvance.utils.ideveloper.service.demo.IDemoService;
 
@@ -31,6 +32,7 @@ public class DemoController extends BaseController {
     
     @RequestMapping(value="/list", method = RequestMethod.GET)
     public String list(HttpServletRequest req, Model model) {  
+        
         model.addAttribute("pageList", demoService.list(new PageParam()));
         return "demo/list";
     }
@@ -55,7 +57,7 @@ public class DemoController extends BaseController {
     }
     
     @RequestMapping(value="/list", method = RequestMethod.POST)
-    public @ResponseBody JsonResult ajaxList(HttpServletRequest req, @RequestBody @Validated PageParam page, BindingResult bindingResult) {
+    public @ResponseBody JsonResult ajaxList(HttpServletRequest req, @RequestBody @Validated Page page, BindingResult bindingResult) {
         JsonResult validateResult = validate(bindingResult);
         if (!RequestUtil.isAjax(req)) {
             return JsonResultCodeEnum.REQUEST_ERROR.buildResult();

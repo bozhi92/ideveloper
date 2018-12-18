@@ -3,16 +3,16 @@ package com.hubbleadvance.utils.ideveloper.service.api;
 import java.util.List;
 
 import com.hubbleadvance.utils.ideveloper.controller.JsonResult;
-import com.hubbleadvance.utils.ideveloper.domain.api.ApiDoc;
+import com.hubbleadvance.utils.ideveloper.domain.api.Api;
 
 public interface IApiService {
-    List<ApiDoc> listByFolderId(String fid);
+    List<Api> listByFolderId(String fid);
     
-    ApiDoc get(String id);
+    Api get(String id);
     
-    JsonResult add(ApiDoc entity);
+    JsonResult add(Api api);
     
-    ApiDoc update(ApiDoc entity);
+    Api update(Api api);
     
     boolean remove(String id);
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.hubbleadvance.utils.ideveloper.controller.PageParam;
+import com.hubbleadvance.utils.ideveloper.controller.Page;
 import com.hubbleadvance.utils.ideveloper.dao.demo.IDemoDao;
 import com.hubbleadvance.utils.ideveloper.domain.demo.Demo;
 import com.hubbleadvance.utils.ideveloper.service.demo.IDemoService;
@@ -17,7 +17,7 @@ public class DemoServiceImpl implements IDemoService {
     private IDemoDao demoDao;
     
     @Override
-    public PageInfo<Demo> list(PageParam page) {
+    public PageInfo<Demo> list(Page page) {
         PageHelper.startPage(page.getPageNum(), page.getPageSize());
         List<Demo> list = demoDao.list(page);
         PageInfo<Demo> pageInfo = new PageInfo<>(list);

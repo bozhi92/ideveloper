@@ -14,18 +14,18 @@ import com.hubbleadvance.utils.ideveloper.common.session.OnlineUser;
 import com.hubbleadvance.utils.ideveloper.common.session.OnlineUserManager;
 import com.hubbleadvance.utils.ideveloper.controller.JsonResult;
 import com.hubbleadvance.utils.ideveloper.controller.login.param.LoginParam;
+import com.hubbleadvance.utils.ideveloper.dao.user.IUserDao;
 import com.hubbleadvance.utils.ideveloper.domain.user.User;
-import com.hubbleadvance.utils.ideveloper.repository.user.IUserRepository;
 import com.hubbleadvance.utils.ideveloper.service.user.IUserService;
 @Service
 public class UserServiceImpl implements IUserService {
     @Autowired
-    private IUserRepository userRepository;
+    private IUserDao userDao;
     
     @Override
     public JsonResult login(LoginParam param, HttpServletRequest req) {
         if (StringUtils.isNotEmpty(param.getAbc()) && StringUtils.isNotEmpty(param.getDef())) {
-            User u = userRepository.getByUname(param.getAbc());
+            User u = userDao.getByUname(param.getAbc());
             if (u != null) {
                 if (u.getPwd().equals(param.getDef())) {
                     HttpSessionHelper.setCurrentLoginUser(req, u);
@@ -48,7 +48,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User get(String id) {
-        return userRepository.getOne(id);
+        return userDao.get(id);
     }
     
 
