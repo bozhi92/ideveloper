@@ -13,11 +13,6 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-/**
- * @description: POI 读取excel
- * @author: Ming.Lee/李明
- * @create: 2018-10-13 13:34
- **/
 public class ExcelUtil {
 
     /**
@@ -64,7 +59,6 @@ public class ExcelUtil {
         }
         return false;
     }
-
 
     /***
      * 读取2007-2013格式

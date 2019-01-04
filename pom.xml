@@ -36,11 +36,6 @@
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- jpa -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
     <!-- mybatis -->
     <dependency>
         <groupId>org.mybatis.spring.boot</groupId>
@@ -154,7 +149,16 @@
       <artifactId>pagehelper-spring-boot-starter</artifactId>
       <version>1.2.10</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-mail</artifactId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/ch.ethz.ganymed/ganymed-ssh2 -->
+    <dependency>
+      <groupId>ch.ethz.ganymed</groupId>
+      <artifactId>ganymed-ssh2</artifactId>
+      <version>262</version>
+    </dependency>
   </dependencies>
   
   <build>
@@ -200,13 +204,6 @@
           </dependency>
           
         </dependencies>
-      </plugin>
-      <plugin>
-         <groupId>org.springframework.boot</groupId>
-         <artifactId>spring-boot-maven-plugin</artifactId>
-         <configuration>
-          <classifier>exec</classifier>
-         </configuration>
       </plugin>
     </plugins>
   </build>

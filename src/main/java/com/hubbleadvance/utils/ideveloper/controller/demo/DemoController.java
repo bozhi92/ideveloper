@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hubbleadvance.utils.ideveloper.PageParam;
 import com.hubbleadvance.utils.ideveloper.common.enums.JsonResultCodeEnum;
 import com.hubbleadvance.utils.ideveloper.common.utils.RequestUtil;
 import com.hubbleadvance.utils.ideveloper.controller.BaseController;
 import com.hubbleadvance.utils.ideveloper.controller.JsonResult;
 import com.hubbleadvance.utils.ideveloper.controller.Page;
+import com.hubbleadvance.utils.ideveloper.controller.PageParam;
 import com.hubbleadvance.utils.ideveloper.domain.demo.Demo;
 import com.hubbleadvance.utils.ideveloper.service.demo.IDemoService;
 
@@ -31,8 +31,7 @@ public class DemoController extends BaseController {
     private IDemoService demoService;
     
     @RequestMapping(value="/list", method = RequestMethod.GET)
-    public String list(HttpServletRequest req, Model model) {  
-        
+    public String list(HttpServletRequest req, Model model) {     
         model.addAttribute("pageList", demoService.list(new PageParam()));
         return "demo/list";
     }

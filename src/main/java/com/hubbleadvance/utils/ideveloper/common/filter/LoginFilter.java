@@ -13,6 +13,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+
 import com.hubbleadvance.utils.ideveloper.common.enums.JsonResultCodeEnum;
 import com.hubbleadvance.utils.ideveloper.common.session.HttpSessionHelper;
 import com.hubbleadvance.utils.ideveloper.common.utils.RequestUtil;
@@ -25,7 +28,8 @@ public class LoginFilter implements Filter {
     private static List<String> excludeUrlList;
     private static List<String> excludeStartWithList;
     private String basePath;
-    
+    //@Autowired
+    //private RedisTemplate<String, Object> redisTemplate;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {   
         excludeUrlList = new ArrayList<String>();
@@ -45,6 +49,7 @@ public class LoginFilter implements Filter {
         if (basePath == null) {
             basePath = req.getContextPath();
         }
+        
         String url = req.getRequestURI();
         for (String sw : excludeStartWithList) {
             if (url.startsWith(sw)) {

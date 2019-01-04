@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.Filter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -42,13 +44,18 @@ public class WebConfig implements WebMvcConfigurer {
     }
     
     @Bean
-    public FilterRegistrationBean<LoginFilter> loginFilterRegistration() {
-      FilterRegistrationBean<LoginFilter> registration = new FilterRegistrationBean<LoginFilter>();
-      registration.setFilter(new LoginFilter());
+    public FilterRegistrationBean<Filter> loginFilterRegistration() {
+      FilterRegistrationBean<Filter> registration = new FilterRegistrationBean<Filter>();
+      registration.setFilter(loginFilter());
       registration.addUrlPatterns("/*");
       registration.setName("loginFilter");
       registration.setOrder(1);
       return registration;
+    }
+    
+    @Bean
+    public Filter loginFilter() {
+        return new LoginFilter();
     }
     
     @Override

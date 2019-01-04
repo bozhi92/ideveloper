@@ -1,6 +1,4 @@
-package com.hubbleadvance.utils.ideveloper;
-
-import com.hubbleadvance.utils.ideveloper.controller.Page;
+package com.hubbleadvance.utils.ideveloper.controller;
 
 public class PageParam extends Page {
 
