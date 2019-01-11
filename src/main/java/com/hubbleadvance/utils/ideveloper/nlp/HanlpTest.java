@@ -21,22 +21,26 @@ public class HanlpTest {
 //        List<String> sentenceList = HanLP.extractSummary(document, 3);
 //        System.out.println(sentenceList);
         
-        Segment segment = HanLP.newSegment().enablePlaceRecognize(true);
-        List<Term> termList = segment.seg(data);
-        for (Term t : termList) {
-            if (t.nature.equals(Nature.ns)) {
-                System.out.println("地名："+t.word);
-            }
-            if (t.nature.equals(Nature.nr) || t.nature.equals(Nature.nrj)|| t.nature.equals(Nature.nrf)) {
-                System.out.println("人名："+t.word);
-            }
-            if (t.nature.equals(Nature.nt)) {
-                System.out.println("机构名："+t.word);
-            }
-            if (t.nature.equals(Nature.t)) {
-                System.out.println("时间："+t.word);
-            }
-        }
+//        Segment segment = HanLP.newSegment().enablePlaceRecognize(true);
+//        List<Term> termList = segment.seg(data);
+//        for (Term t : termList) {
+//            if (t.nature.equals(Nature.ns)) {
+//                System.out.println("地名："+t.word);
+//            }
+//            if (t.nature.equals(Nature.nr) || t.nature.equals(Nature.nrj)|| t.nature.equals(Nature.nrf)) {
+//                System.out.println("人名："+t.word);
+//            }
+//            if (t.nature.equals(Nature.nt)) {
+//                System.out.println("机构名："+t.word);
+//            }
+//            if (t.nature.equals(Nature.t)) {
+//                System.out.println("时间："+t.word);
+//            }
+//            if (t.nature.equals(Nature.nz)) {
+//                System.out.println("专有："+t.word);
+//            }
+//        }
         //System.out.println(JSON.toJSONString(termList));
+        System.out.println(JSON.toJSONString(Nature.nr.equals(Nature.nr1)));
     }
 }

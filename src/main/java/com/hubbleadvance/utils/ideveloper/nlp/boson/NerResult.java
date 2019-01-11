@@ -7,5 +7,5 @@ import lombok.Data;
 public class NerResult {
     private List<String> word;
     private List<String> tag;
-    private List<List> entity;
+    private List<Object[]> entity;
 }
