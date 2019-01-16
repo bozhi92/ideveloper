@@ -54,7 +54,7 @@ public class CommonTest {
             s.setPercentage(20);
 
 
-        HttpResult result = HttpUtil.post(BosonConstants.SUMMARY, JSON.toJSONString(s), BosonConstants.HEADER);
+        HttpResult result = HttpUtil.post("http://10.50.1.202:9000?rcmd/158", JSON.toJSONString(s));
         //List<List<Object[]>> re = JSON.parseObject(result.getBody(), new TypeReference<List<List<Object[]>>>(){});
         System.out.println(result.getBody());
         //System.out.println(JSON.toJSONString(datas));

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hubbleadvance.utils.ideveloper.dao.article.IArticleDao">
+
+  <select id="list" resultMap="list">
+    select id from demo
+    order by id
+  </select>
+
+  <select id="get" resultMap="get" parameterType="java.lang.String">
+    select id from demo
+    where id= #{id}
+  </select>
+
+  <insert id="save" parameterType="com.hubbleadvance.utils.ideveloper.domain.article.Article">
+    insert into demo(id)
+    values (#{id})
+  </insert>
+
+  <insert id="batchSave" parameterType="java.util.List">
+    insert into demo(id)
+    values 
+    <foreach collection="list" separator="," index="no" item="it">
+      (#{it.id})
+    </foreach>
+    
+  </insert>
+
+  <delete id="remove" parameterType="java.lang.String">
+    delete from demo where id= #{id}
+  </delete>
+
+  <delete id="batchRemove" parameterType="java.util.List">
+    delete from demo where id in 
+    <foreach open="(" close=")" collection="list" separator="," index="list" item="it">
+      #{it}
+    </foreach>
+  </delete>
+  
+  <update id="update" parameterType="com.hubbleadvance.utils.ideveloper.domain.demo.Demo">
+    update demo 
+  </update>
+
+  <resultMap type="com.hubbleadvance.utils.ideveloper.domain.demo.Demo" id="list">
+    <id property="id" column="id" />
+    <result property="id" column="id" />
+  </resultMap>
+
+  <resultMap type="com.hubbleadvance.utils.ideveloper.domain.demo.Demo" id="get">
+    <id property="id" column="id" />
+    <result property="id" column="id" />
+  </resultMap>
+</mapper>
