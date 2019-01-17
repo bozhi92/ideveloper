@@ -3,52 +3,76 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hubbleadvance.utils.ideveloper.dao.article.IArticleDao">
 
-  <select id="list" resultMap="list">
-    select id from demo
-    order by id
+  <select id="list" resultMap="list" parameterType="java.lang.String">
+    select id,title,source,url,author,blog,pub_time,cra_time from article
+    <if test="search != null">
+    where MATCH(title) AGAINST (#{search})
+    </if>
+    order by pub_time desc
   </select>
 
   <select id="get" resultMap="get" parameterType="java.lang.String">
-    select id from demo
+    select * from article
     where id= #{id}
   </select>
 
   <insert id="save" parameterType="com.hubbleadvance.utils.ideveloper.domain.article.Article">
-    insert into demo(id)
-    values (#{id})
+    insert into article(id,title,content,source,url,author,blog,pub_time,cra_time)
+    values (#{id},#{title},#{content},#{source},#{url},#{author},#{blog},#{pubTime},#{craTime})
   </insert>
-
+  
+    <insert id="saveVisited" parameterType="java.lang.String">
+    insert into visited_url(url)
+    values (#{url})
+    </insert>
+  <select id="listVisited" resultType="java.lang.String">
+    select url from visited_url
+  </select>
   <insert id="batchSave" parameterType="java.util.List">
-    insert into demo(id)
+    insert into article(id,title,content,source,url,author,blog,pub_time,cra_time)
     values 
     <foreach collection="list" separator="," index="no" item="it">
-      (#{it.id})
+      (#{it.id},#{it.title},#{it.content},#{it.source},#{it.url},#{it.author},#{it.blog},#{it.pubTime},#{it.craTime})
     </foreach>
     
   </insert>
 
   <delete id="remove" parameterType="java.lang.String">
-    delete from demo where id= #{id}
+    delete from article where id= #{id}
   </delete>
 
   <delete id="batchRemove" parameterType="java.util.List">
-    delete from demo where id in 
+    delete from article where id in 
     <foreach open="(" close=")" collection="list" separator="," index="list" item="it">
       #{it}
     </foreach>
   </delete>
   
-  <update id="update" parameterType="com.hubbleadvance.utils.ideveloper.domain.demo.Demo">
-    update demo 
+  <update id="update" parameterType="com.hubbleadvance.utils.ideveloper.domain.article.Article">
+    update article 
   </update>
 
-  <resultMap type="com.hubbleadvance.utils.ideveloper.domain.demo.Demo" id="list">
+  <resultMap type="com.hubbleadvance.utils.ideveloper.domain.article.Article" id="list">
     <id property="id" column="id" />
-    <result property="id" column="id" />
+    <result property="title" column="title"/>
+    <result property="content" column="content"/>
+    <result property="source" column="source"/>
+    <result property="url" column="url"/>
+    <result property="author" column="author"/>
+    <result property="blog" column="blog"/>
+    <result property="pubTime" column="pub_time"/>
+    <result property="craTime" column="cra_time"/>
   </resultMap>
 
-  <resultMap type="com.hubbleadvance.utils.ideveloper.domain.demo.Demo" id="get">
+  <resultMap type="com.hubbleadvance.utils.ideveloper.domain.article.Article" id="get">
     <id property="id" column="id" />
-    <result property="id" column="id" />
+        <result property="title" column="title"/>
+    <result property="content" column="content"/>
+    <result property="source" column="source"/>
+    <result property="url" column="url"/>
+    <result property="author" column="author"/>
+    <result property="blog" column="blog"/>
+    <result property="pubTime" column="pub_time"/>
+    <result property="craTime" column="cra_time"/>
   </resultMap>
 </mapper>

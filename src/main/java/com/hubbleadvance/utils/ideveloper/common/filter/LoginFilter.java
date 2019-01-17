@@ -39,6 +39,7 @@ public class LoginFilter implements Filter {
         excludeStartWithList.add("/static");
         excludeStartWithList.add("/command");
         excludeStartWithList.add("/demo");
+        excludeStartWithList.add("/crawl");
     }
 
     @Override

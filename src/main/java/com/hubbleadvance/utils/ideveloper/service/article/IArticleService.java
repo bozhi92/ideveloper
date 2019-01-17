@@ -8,5 +8,9 @@ public interface IArticleService {
     boolean save(Article article);
     boolean batchSave(List<Article> articleList);
     
-    List<Article> list();
+    Article get(String id);
+    List<Article> list(String search);
+    
+    int saveVisited(String url);
+    List<String> listVisited();
 }
