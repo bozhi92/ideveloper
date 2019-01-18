@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hubbleadvance.utils.ideveloper.dao.article.IArticleDao">
 
-  <select id="list" resultMap="list" parameterType="java.lang.String">
+  <select id="list" resultMap="list" parameterType="com.hubbleadvance.utils.ideveloper.domain.article.ArticleQuery">
     select id,title,source,url,author,blog,pub_time,cra_time from article
     <if test="search != null">
     where MATCH(title) AGAINST (#{search})

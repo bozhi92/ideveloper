@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.hubbleadvance.utils.ideveloper.common.utils.HttpUtil;
 import com.hubbleadvance.utils.ideveloper.common.utils.IdUtil;
 import com.hubbleadvance.utils.ideveloper.demo.crawl.link.Links;
 import com.hubbleadvance.utils.ideveloper.domain.article.Article;
@@ -28,9 +29,11 @@ import com.hubbleadvance.utils.ideveloper.domain.rule.Rule;
 import com.hubbleadvance.utils.ideveloper.service.article.IArticleService;
 
 @Service
-public class CnblogTempImpl implements CnblogTemp{
+public class CnblogTempImpl implements CnblogTemp {
+    public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     @Autowired
     private IArticleService articleService;
+    
     @Override
     public void crawl() throws IOException, ParseException {
         String[] start = {"https://www.cnblogs.com/"};
@@ -41,9 +44,9 @@ public class CnblogTempImpl implements CnblogTemp{
             }
         }
         initCrawlerWithSeeds(start);
-        int i = 0;// && Links.getVisitedUrlNum() <= 1000
+        int i = 0;
         while (!Links.unVisitedUrlQueueIsEmpty()) {
-            String visitUrl = (String)Links.removeHeadOfUnVisitedUrlQueue();
+            String visitUrl = Links.removeHeadOfUnVisitedUrlQueue();
             if (visitUrl == null){
                 continue;
             }
@@ -55,7 +58,8 @@ public class CnblogTempImpl implements CnblogTemp{
                     .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
                     .header("Accept-Encoding", "gzip, deflate, br")
                     .header("Accept-Language", "zh-CN,zh;q=0.9")
-                    .header("cookie","_ga=GA1.2.1916901186.1546485922; __gads=ID=60b3751d46793a7c:T=1546485914:S=ALNI_MZZNIa4PEc84vCETqjpjjO3FDIkfQ; UM_distinctid=16816c344f9105-00044db02e620b-58422116-1fa400-16816c344fcaa8; CNZZDATA1000205457=1908536604-1546565242-https%253A%252F%252Fwww.baidu.com%252F%7C1546565242; _gid=GA1.2.1498051252.1547430584; CNZZDATA4366031=cnzz_eid%3D804414752-1547709388-null%26ntime%3D1547709388; .CNBlogsCookie=111A24E611C946E23FF9F6864E2720F02C06B9189C1049A6A1C3DBA3E389126416E1FCBD63301B658E38D1008EEC647F04141FF1D8C9131662D50A1CCDB7F2F255FF588E63F4F6CAFA8A2F92D572B6B9A35F031A175B4BB8E4E6C73DDAAB9B66A4849ABB; .Cnblogs.AspNetCore.Cookies=CfDJ8KlpyPucjmhMuZTmH8oiYTPWGMtDdPj_E66M3TZrgiacs66rkaS4Yy3uwVD4eaTT7ni7lW8C9dzZJ-Na-8sao-q9uy7BF7aaFrrcom3WU5b4ObAMR8Rpv0kl5PvTy73r7Ga01Rj7GhwdCvpb5VdC87xZl7Bp4IRkFmJ2FTM3dWwAFvoyCtpI0qX22yy7HqN3zjNAzgXAPZvQiC2A83c9__7XcaIwL8Iv6uOGV0Cs6ewDspnYq-7QFYSssV8dV9guiH3V7Eez4dVpVC_6_HHiCOAhsU5uNzkfn_26m4y_5fS87uJyQjewmVjTzuew4EH03w; _gat=1")
+                    .header("referer", "https://www.cnblogs.com/")
+                    .header("cookie","_ga=GA1.2.1916901186.1546485922; __gads=ID=60b3751d46793a7c:T=1546485914:S=ALNI_MZZNIa4PEc84vCETqjpjjO3FDIkfQ; UM_distinctid=16816c344f9105-00044db02e620b-58422116-1fa400-16816c344fcaa8; CNZZDATA1000205457=1908536604-1546565242-https%253A%252F%252Fwww.baidu.com%252F%7C1546565242; _gid=GA1.2.1498051252.1547430584; CNZZDATA4366031=cnzz_eid%3D804414752-1547709388-null%26ntime%3D1547709388; .CNBlogsCookie=111A24E611C946E23FF9F6864E2720F02C06B9189C1049A6A1C3DBA3E389126416E1FCBD63301B658E38D1008EEC647F04141FF1D8C9131662D50A1CCDB7F2F255FF588E63F4F6CAFA8A2F92D572B6B9A35F031A175B4BB8E4E6C73DDAAB9B66A4849ABB; .Cnblogs.AspNetCore.Cookies=CfDJ8KlpyPucjmhMuZTmH8oiYTPWGMtDdPj_E66M3TZrgiacs66rkaS4Yy3uwVD4eaTT7ni7lW8C9dzZJ-Na-8sao-q9uy7BF7aaFrrcom3WU5b4ObAMR8Rpv0kl5PvTy73r7Ga01Rj7GhwdCvpb5VdC87xZl7Bp4IRkFmJ2FTM3dWwAFvoyCtpI0qX22yy7HqN3zjNAzgXAPZvQiC2A83c9__7XcaIwL8Iv6uOGV0Cs6ewDspnYq-7QFYSssV8dV9guiH3V7Eez4dVpVC_6_HHiCOAhsU5uNzkfn_26m4y_5fS87uJyQjewmVjTzuew4EH03w")
                     .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36")
                     .get();
             Article article = parse(doc, visitUrl);
@@ -80,14 +84,12 @@ public class CnblogTempImpl implements CnblogTemp{
         }
     }
     
-    public static void initCrawlerWithSeeds(String[] seeds) {
+    private void initCrawlerWithSeeds(String[] seeds) {
         for (int i = 0; i < seeds.length; i++){
             Links.addUnvisitedUrlQueue(seeds[i]);
         }
     }
-    
-    public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm"); 
-    
+      
     public static Article parse(Document doc, String url) throws IOException, ParseException {  
         Article article = null;
         if (url.startsWith("https://www.cnblogs.com/")) {
@@ -97,9 +99,6 @@ public class CnblogTempImpl implements CnblogTemp{
                 Elements es = doc.select("#cb_post_title_url");
                 if (es.size()>0) {
                     title = es.get(0).text();
-                    if (title.length()>100) {
-                        System.out.println(title);
-                    }
                 }
                 String date = doc.select("#post-date").text();
                 Elements info = doc.select("#post-date").next();
@@ -117,7 +116,6 @@ public class CnblogTempImpl implements CnblogTemp{
 //                    String abs = img.attr("abs:src");
 //                    if (abs.indexOf("cnblogs.com/blog/")>-1) {
 //                        String src = FileUtil.downImages(downloadFilePath, abs);
-//                        System.out.println("为:"+src);
 //                    }
 //                }
                 String content = body.html();
@@ -214,61 +212,10 @@ public class CnblogTempImpl implements CnblogTemp{
         return article;
     }
     
-    public static void main(String[] args) {
-        Rule rule = new Rule();
-        List<Option> options = new ArrayList<>();
-        Option op1 = new Option();
-        op1.setType(1);
-        op1.setLabel("http:123.com");
-        Option op2 = new Option();
-        op2.setType(3);
-        op2.setLabel(".html");
-        options.add(op1);
-        options.add(op2);
-        rule.setOptions(options);
+    public static void main(String[] args) throws IOException {
+        String url = "https://blog.csdn.net/api/articles?type=more&category=home&shown_offset=1547803454518285";
+        String res = HttpUtil.get(url).getBody();
         
-        List<Line> lines = new ArrayList<>();
-        Line line = new Line();
-        line.setType(1);
-        
-        line.setPos(Arrays.asList(0,1));
-        lines.add(line);
-        rule.setLines(lines);
-        System.out.println(JSON.toJSONString(rule));
-        
-        String result = "";
-        List<JSONArray> list = new ArrayList<>();
-        for (Line l : rule.getLines()) {
-            int c = l.getType();
-            List<Integer> ra = l.getPos();
-            if (c == 1) {
-                for (int i=0;i<ra.size();i++) {
-                    int num = ra.get(i);
-                    if (i == 0) {
-                        result += "(";  
-                    }
-                    List<Option> o = rule.getOptions();
-                    Option oo = o.get(num);
-                    int type = oo.getType();
-                    String d = oo.getLabel();
-                    String ti = "";
-                    if (type == 1) {
-                        ti+="startwith:"+d;
-                    }else if (type == 2) {
-                        ti+="include:"+d;
-                    }else if (type == 3) {
-                        ti+="endwith:"+d;
-                    }
-                    result += ti;
-                    if (i<ra.size()-1) {
-                        result+=" and ";
-                    }
-                    if (i == ra.size()-1) {
-                        result += ")";  
-                    }
-                }
-            }
-        }
-        System.out.println(result);
+        System.out.println();
     }
 }

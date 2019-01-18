@@ -35,5 +35,19 @@ public final class HttpUtil {
             e.printStackTrace();
         }
         return result;
-    }    
+    } 
+    
+    public static HttpResult get(String url) {
+        HttpResult result = new HttpResult();
+        try {
+            HttpResponse<String> jsonResponse = Unirest.get(url).header("Content-Type","application/json").asString();
+            result.setBody(jsonResponse.getBody());
+            result.setStatus(jsonResponse.getStatus());
+            result.setStatusText(jsonResponse.getStatusText());
+        } catch (UnirestException e){
+            log.error("post请求出错, equestUrl="+url);
+            e.printStackTrace();
+        }
+        return result;
+    } 
 }

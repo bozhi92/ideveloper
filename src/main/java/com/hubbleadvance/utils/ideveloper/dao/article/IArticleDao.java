@@ -6,9 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.hubbleadvance.utils.ideveloper.domain.article.Article;
+import com.hubbleadvance.utils.ideveloper.domain.article.ArticleQuery;
 @Mapper
 public interface IArticleDao {
-    List<Article> list(@Param("search")String search);
+    List<Article> list(ArticleQuery query);
     
     Article get(String id);
     

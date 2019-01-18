@@ -10,8 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.hubbleadvance.utils.ideveloper.crawl.SourceEnum;
 import com.hubbleadvance.utils.ideveloper.crawl.cnblog.CnblogTemp;
+import com.hubbleadvance.utils.ideveloper.domain.article.Article;
+import com.hubbleadvance.utils.ideveloper.domain.article.ArticleQuery;
 import com.hubbleadvance.utils.ideveloper.service.article.IArticleService;
 
 @Controller
@@ -29,22 +30,21 @@ public class CrawlController {
     }
     
     @RequestMapping(value="/crawl/article/list")
-    public Object list(Model model) { 
-        model.addAttribute("list",articleService.list(null));
-        //model.addAttribute("source",SourceEnum.values());
+    public String list(Model model, ArticleQuery query) { 
+        model.addAttribute("pageInfo",articleService.list(query));
         return "article/list";
     }
     
-    @RequestMapping(value="/crawl/article/list/{search}")
-    public Object search(Model model, @PathVariable("search")String search) { 
-        model.addAttribute("list",articleService.list(search));
-        //model.addAttribute("source",SourceEnum.values());
-        return "article/list";
+    @RequestMapping(value="/crawl/article/ajaxList")
+    public String ajaxList(Model model, ArticleQuery query) { 
+        model.addAttribute("pageInfo",articleService.list(query));
+        return "article/listFrag";
     }
     
     @RequestMapping(value="/crawl/article/{id}")
     public Object get(@PathVariable("id") String id, Model model) {
-        model.addAttribute("article", articleService.get(id));
+        Article article = articleService.get(id);
+        model.addAttribute("article", article);
         return "article/article";
     }
 }

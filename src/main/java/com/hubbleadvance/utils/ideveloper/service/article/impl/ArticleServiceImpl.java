@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hubbleadvance.utils.ideveloper.dao.article.IArticleDao;
 import com.hubbleadvance.utils.ideveloper.domain.article.Article;
+import com.hubbleadvance.utils.ideveloper.domain.article.ArticleQuery;
 import com.hubbleadvance.utils.ideveloper.service.article.IArticleService;
 @Service
 public class ArticleServiceImpl implements IArticleService {
@@ -26,9 +29,11 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public List<Article> list(String search) {
-        // TODO Auto-generated method stub
-        return articleDao.list(search);
+    public PageInfo<Article> list(ArticleQuery query) {
+        PageHelper.startPage(query.getPageNum(), query.getPageSize());
+        List<Article> list = articleDao.list(query);
+        PageInfo<Article> pageInfo = new PageInfo<>(list);
+        return pageInfo;
     }
 
     @Override
@@ -48,5 +53,4 @@ public class ArticleServiceImpl implements IArticleService {
         // TODO Auto-generated method stub
         return articleDao.listVisited();
     }
-
 }
