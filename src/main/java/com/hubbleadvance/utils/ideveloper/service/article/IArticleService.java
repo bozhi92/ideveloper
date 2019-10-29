@@ -13,6 +13,10 @@ public interface IArticleService {
     Article get(String id);
     PageInfo<Article> list(ArticleQuery query);
     
-    int saveVisited(String url);
+    boolean saveVisited(String url);
     List<String> listVisited();
+    
+    boolean saveUnvisit(String url);
+    boolean delUnvisit(String url);
+    List<String> listUnvisit();
 }

@@ -43,14 +43,32 @@ public class ArticleServiceImpl implements IArticleService {
     }
 
     @Override
-    public int saveVisited(String url) {
+    public boolean saveVisited(String url) {
         // TODO Auto-generated method stub
-        return articleDao.saveVisited(url);
+        return articleDao.saveVisited(url) > 0;
     }
 
     @Override
     public List<String> listVisited() {
         // TODO Auto-generated method stub
         return articleDao.listVisited();
+    }
+
+    @Override
+    public boolean saveUnvisit(String url) {
+        // TODO Auto-generated method stub
+        return articleDao.saveUnvisit(url)>0;
+    }
+
+    @Override
+    public boolean delUnvisit(String url) {
+        // TODO Auto-generated method stub
+        return articleDao.delUnvisit(url)>0;
+    }
+
+    @Override
+    public List<String> listUnvisit() {
+        // TODO Auto-generated method stub
+        return articleDao.listUnvisit();
     }
 }

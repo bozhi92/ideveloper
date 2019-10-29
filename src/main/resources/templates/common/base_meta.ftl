@@ -8,4 +8,3 @@
 <!--   <link rel="icon" type="image/png" href="/static/i/favicon.png"> -->
 <!--   <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png"> -->
 <meta name="apple-mobile-web-app-title" content="ideveloper" />
-<title>ideveloper</title>

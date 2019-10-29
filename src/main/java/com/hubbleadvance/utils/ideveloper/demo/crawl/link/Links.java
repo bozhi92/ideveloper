@@ -47,4 +47,8 @@ public class Links {
     public static boolean unVisitedUrlQueueIsEmpty() {
         return unVisitedUrlQueue.isEmpty();
     }
+    
+    public static boolean visitedUrlSetContains(String url) {
+        return visitedUrlSet.contains(url);
+    }
 }

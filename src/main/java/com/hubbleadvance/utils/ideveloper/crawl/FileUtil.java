@@ -5,10 +5,13 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 import com.hubbleadvance.utils.ideveloper.common.utils.IdUtil;
 
 public class FileUtil {
+    private static final List<String> exts = Arrays.asList(".png",".jpg",".gif",".jpeg");
     public static String downImages(String filePath,String imgUrl) {
 //        //图片url中的前面部分：例如"http://images.csdn.net/"
 //        String beforeUrl = imgUrl.substring(0,imgUrl.lastIndexOf("/")+1);
@@ -20,7 +23,19 @@ public class FileUtil {
 //        newFileName = newFileName.replaceAll("\\+", "\\%20");
 //        //编码之后的url
 //        imgUrl = beforeUrl + newFileName;
-        String fileName = IdUtil.getStrSnowFlakeId();
+        String ext;
+        try {
+            ext = imgUrl.substring(imgUrl.lastIndexOf("."), imgUrl.length());
+        } catch (java.lang.StringIndexOutOfBoundsException e1) {
+            ext = ".jpg";
+        }
+        if (ext.contains("?")) {
+            ext = ext.substring(0, ext.indexOf("?"));
+        }
+        if (!exts.contains(ext.toLowerCase())) {
+            ext = ".jpg";
+        }
+        String fileName = IdUtil.getStrSnowFlakeId()+ext;
         try {
             //创建文件目录
             File files = new File(filePath);
@@ -44,6 +59,7 @@ public class FileUtil {
             out.close();
             is.close();
         } catch (Exception e) {
+            System.out.println(imgUrl);
             e.printStackTrace();
         }
         return filePath + fileName;

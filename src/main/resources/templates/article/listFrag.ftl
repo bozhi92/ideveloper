@@ -12,7 +12,7 @@
             <tr>
                 <td><a target="_blank" href="/crawl/article/${it.id}" title="${it.title}">${it.title}</a></td>
                 <td>${it.source}</td>
-                <td><#if it.pubTime??>${it.pubTime?string('yyyy-MM-dd hh:mm')}</#if></td>
+                <td><#if it.pubTime??>${it.pubTime?string('yyyy-MM-dd HH:mm')}</#if></td>
                 <td><a target="_blank" href="${it.blog}">${it.author}</td>
             </tr>
         </#list>

@@ -18,4 +18,8 @@ public interface IArticleDao {
     
     int saveVisited(@Param("url")String url);
     List<String> listVisited();
+    
+    int saveUnvisit(@Param("url")String url);
+    int delUnvisit(@Param("url")String url);
+    List<String> listUnvisit();
 }
